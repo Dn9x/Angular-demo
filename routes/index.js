@@ -1,8 +1,9 @@
+var path = require('path');
 
-/*
- * GET home page.
- */
+module.exports = function(app){
+  app.get('/',function(req,res){
+    var html = path.normalize(__dirname + '/../views/index.html');
+    res.sendfile(html);
+  });
 
-exports.index = function(req, res){
-  res.render('index', { title: 'Express' });
 };

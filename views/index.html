@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en" ng-app>
+    <meta charset="utf-8">
+    <title>{{users.length}}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="../public/javascripts/angular.min.js"></script>
+    <script src="../public/javascripts/controllers.js"></script>
+  </head>
+<body>
+
+  <div ng-controller="UserListCtrl">
+  	Search: <input ng-model="query">
+  	Sort by:
+	<select ng-model="orderProp">
+	  <option value="name">name</option>
+	  <option value="age">age</option>
+	</select>
+
+  	<ul>
+  		<li ng-repeat="user in users | filter:query | orderBy:orderProp">
+  			{{user.name}}&nbsp;&nbsp;{{user.age}}&nbsp;&nbsp;{{user.sex}}
+  		</li>
+  		<li>usersd length:{{users.length}}</li>
+  	</ul>
+  </div>
+</body>
+</html>
+
