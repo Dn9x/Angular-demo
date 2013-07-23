@@ -5,6 +5,7 @@
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
+  , detail = require('./routes/detail')
   , http = require('http')
   , path = require('path');
 
@@ -28,8 +29,11 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/partials/:filename', routes.partials);
+app.get('/cont/:filename', routes.cont);
 app.use(routes.index);
+app.get('/home', detail.home);
+app.get('/post', detail.post);
+app.get('/join', detail.join);
 app.get('/users', user.list);
 app.get('/lis', user.lis);
 app.get('/test', user.test);

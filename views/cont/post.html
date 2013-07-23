@@ -1,0 +1,9 @@
+  <div ng-controller="postctrl">
+    <div class="cells" ng-repeat="art in artils">
+    	<div class="imgs"><img src="{{art.head}}" align="absmiddle" /></div>
+    	<div class="reply">{{art.replys}}</div>
+    	<div class="title">
+    		<a href="{{art.href}}">{{art.title.substr(0, 56)}}...</a>&nbsp;&nbsp;&nbsp;&nbsp;{{art.times}}</a>
+    	</div>
+    </div>
+  </div>
