@@ -1,4 +1,5 @@
-var app = angular.module('anApp', []);
+//titleFilters是过滤器
+var app = angular.module('anApp', ['titleFilters']);  
  
 app.config(function($locationProvider, $routeProvider) {
   $routeProvider
@@ -8,15 +9,17 @@ app.config(function($locationProvider, $routeProvider) {
     .otherwise({redirectTo:'/'});
 });
 
-app.controller('homectrl', function($scope, $http){
+//使用依赖注入，防止代码压缩的时候‘所需服务’使用失败
+app.controller('homectrl', ['$scope', '$http', function($scope, $http){
 	$http.get('http://localhost:3000/home', {"foo":"bar"}).success(function(data) {
+    	//这里不能直接使用data
     	var js = eval('(' + data.tits + ')');
 		
 	    $scope.artils = js;
   	});
-});
+}]);
 
-app.controller('postctrl', function($scope, $http){
+app.controller('postctrl', ['$scope', '$http', function($scope, $http){
     $http.get("http://localhost:3000/post", {"foo":"bar"})
 	.success(function(data, status, headers, config) {
 		var js = eval('(' + data.cells + ')');
@@ -25,9 +28,9 @@ app.controller('postctrl', function($scope, $http){
 	}).error(function(data, status, headers, config) {
 	    $scope.status = status;
 	});
-});
+}]);
 
-app.controller('joinctrl', function($scope, $http){
+app.controller('joinctrl', ['$scope', '$http', function($scope, $http){
     $http.get("http://localhost:3000/join", {"foo":"bar"})
 	.success(function(data, status, headers, config) {
 		var js = eval('(' + data.repls + ')');
@@ -36,4 +39,8 @@ app.controller('joinctrl', function($scope, $http){
 	}).error(function(data, status, headers, config) {
 	    $scope.status = status;
 	});
-});
+
+  	$scope.big = function(pars){
+  		alert('你要打开: ' + pars);
+  	};
+}]);
