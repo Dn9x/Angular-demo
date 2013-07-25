@@ -1,13 +1,15 @@
 //titleFilters是过滤器
 var app = angular.module('anApp', ['titleFilters']);  
  
-app.config(function($locationProvider, $routeProvider) {
+app.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $routeProvider
     .when('/', { templateUrl: 'cont/home', controller: 'homectrl' })
     .when('/post', { templateUrl: 'cont/post', controller: 'postctrl' })
     .when('/join', { templateUrl: 'cont/join', controller: 'joinctrl' })
     .otherwise({redirectTo:'/'});
-});
+
+    //$locationProvider.html5Mode(true);
+}]);
 
 //使用依赖注入，防止代码压缩的时候‘所需服务’使用失败
 app.controller('homectrl', ['$scope', '$http', function($scope, $http){

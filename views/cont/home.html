@@ -1,5 +1,12 @@
   <div ng-controller="homectrl">
-    <div class="cells" ng-repeat="art in artils">
+    <div class="cells">
+    	Search: <input ng-model="query">
+    	<select ng-model="orderProp">
+		  <option value="replys">replys</option>
+		  <option value="times">times</option>
+		</select>
+    </div>
+    <div class="cells" ng-repeat="art in artils | filter:query | orderBy:orderProp">
     	<div class="imgs"><img ng-src="{{art.head}}" align="absmiddle" /></div>
     	<div class="reply">{{art.replys}}</div>
     	<div class="title">
